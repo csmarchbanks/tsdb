@@ -571,7 +571,7 @@ func (s *populatedChunkSeries) Next() bool {
 			if chks[0].MaxTime >= s.mint {
 				break
 			}
-			chks = chks[1:]
+			s.chunks.Put(chks[0].Chunk)
 		}
 
 		// This is to delete in place while iterating.
@@ -601,6 +601,10 @@ func (s *populatedChunkSeries) Next() bool {
 
 		if len(chks) == 0 {
 			continue
+		}
+
+		for _, chk := range s.chks {
+			s.chunks.Put(chk.Chunk)
 		}
 
 		s.lset = lset
