@@ -371,6 +371,10 @@ func (s *Reader) Chunk(ref uint64) (chunkenc.Chunk, error) {
 	return s.pool.Get(chunkenc.Encoding(r[0]), r[1:1+l])
 }
 
+func (s *Reader) Put(chk chunkenc.Chunk) {
+	s.pool.Put(chk)
+}
+
 func nextSequenceFile(dir string) (string, int, error) {
 	names, err := fileutil.ReadDir(dir)
 	if err != nil {

@@ -118,6 +118,9 @@ type ChunkReader interface {
 	// Chunk returns the series data chunk with the given reference.
 	Chunk(ref uint64) (chunkenc.Chunk, error)
 
+	// Put returns a chunk to the backing chunk pool.
+	Put(chk chunkenc.Chunk)
+
 	// Close releases all underlying resources of the reader.
 	Close() error
 }

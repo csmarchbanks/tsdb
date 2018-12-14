@@ -633,6 +633,11 @@ func (s *populatedChunkSeries) Next() bool {
 			continue
 		}
 
+		// return the previous chunks to the pool
+		for _, chk := range s.chks {
+			s.chunks.Put(chk.Chunk)
+		}
+
 		s.lset = lset
 		s.chks = chks
 		s.intervals = dranges

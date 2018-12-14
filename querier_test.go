@@ -1331,6 +1331,10 @@ func (cr mockChunkReader) Chunk(id uint64) (chunkenc.Chunk, error) {
 	return nil, errors.New("Chunk with ref not found")
 }
 
+func (cr mockChunkReader) Put(_ chunkenc.Chunk) {
+	// This is a noop.
+}
+
 func (cr mockChunkReader) Close() error {
 	return nil
 }
